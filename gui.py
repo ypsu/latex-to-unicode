@@ -40,6 +40,7 @@ latex_entry = ttk.Entry(mainframe, width=50, textvariable=latex_code)
 latex_entry.grid(column=2, row=1, columnspan=3, sticky=(W,E))
 latex_entry.focus_set()
 latex_entry.bind("<KeyRelease-Return>", command_paste)
+latex_entry.bind("<KeyRelease-Escape>", command_exit)
 
 unicode_entry = ttk.Entry(mainframe, textvariable=unicode_code,state="readonly")
 unicode_entry.grid(column=2, row=2, columnspan=3, sticky=(W,E))
