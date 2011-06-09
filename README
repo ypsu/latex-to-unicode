@@ -9,4 +9,7 @@ This application is written in Python using tkinter.
 Special thanks to Jos van den Oever, the author of unilatex.vim from
 which I have the latex <-> unicode mapping.
 
-Work in progress - it doesn't work yet.
+Needs xclip and xdotool.
+
+Currently works only on Linux. Feel free to fork and make it work under
+other operating systems.
