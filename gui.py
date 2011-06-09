@@ -5,7 +5,7 @@ from tkinter import ttk
 import convert
 
 def command_paste(*args):
-	print(latex_code.get())
+	print(unicode_code.get())
 	root.destroy()
 
 def command_exit(*args):
