@@ -5,6 +5,7 @@ def convert(s):
 
 	s = convert_latex_symbols(s)
 	s = convert_superscripts(s)
+	s = convert_subscripts(s)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
@@ -22,8 +23,8 @@ def convert_latex_symbols(s):
 		s = s.replace(key, val)
 	return s
 
-# ^23 => ²3
-# ^{23} => ²³
+# _23 => ₂3
+# _{23} => ₂₃
 def convert_superscripts(s):
 	s = list(s)
 	ss = ""
@@ -50,6 +51,34 @@ def convert_superscripts(s):
 			ss += translate_if_possible(ch, supscripts)
 	return ss
 
+# ^23 => ²3
+# ^{23} => ²³
+def convert_subscripts(s):
+	s = list(s)
+	ss = ""
+	mode_normal, mode_caret, mode_long = range(3)
+	mode = mode_normal
+	for ch in s:
+		if mode == mode_normal and ch == '_':
+			mode = mode_caret
+			continue
+		elif mode == mode_caret and ch == '{':
+			mode = mode_long
+			continue
+		elif mode == mode_caret:
+			ss += translate_if_possible(ch, subscripts)
+			mode = mode_normal
+			continue
+		elif mode == mode_long and ch == '}':
+			mode = mode_normal
+			continue
+
+		if mode == mode_normal:
+			ss += ch
+		else:
+			ss += translate_if_possible(ch, subscripts)
+	return ss
+
 def translate_if_possible(ch, d):
 	if ch in d:
 		return d[ch]
@@ -69,6 +98,21 @@ supscripts["9"] = "⁹"
 supscripts["+"] = "⁺"
 supscripts["-"] = "⁻"
 supscripts["="] = "⁼"
+
+subscripts = {}
+subscripts["0"] = "₀"
+subscripts["1"] = "₁"
+subscripts["2"] = "₂"
+subscripts["3"] = "₃"
+subscripts["4"] = "₄"
+subscripts["5"] = "₅"
+subscripts["6"] = "₆"
+subscripts["7"] = "₇"
+subscripts["8"] = "₈"
+subscripts["9"] = "₉"
+subscripts["+"] = "₊"
+subscripts["-"] = "₋"
+subscripts["="] = "₌"
 
 latex_symbols = {}
 latex_symbols["\\alpha"] = "α"
