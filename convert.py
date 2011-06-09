@@ -2,16 +2,75 @@ def convert(s):
 	ss = convert_single_symbol(s)
 	if ss != None:
 		return ss
+
+	s = convert_latex_symbols(s)
+	s = convert_superscripts(s)
 	return s
 
+# If s is just a latex code "alpha" or "beta" it converts it to its
+# unicode representation.
 def convert_single_symbol(s):
 	ss = "\\" + s
 	if ss in latex_symbols:
 		return latex_symbols[ss]
 	return None
 
-latex_symbols = {}
+# Replace each "\alpha", "\beta" and similar latex symbols with
+# their unicode representation.
+def convert_latex_symbols(s):
+	for key, val in latex_symbols.items():
+		s = s.replace(key, val)
+	return s
 
+# ^23 => ²3
+# ^{23} => ²³
+def convert_superscripts(s):
+	s = list(s)
+	ss = ""
+	mode_normal, mode_caret, mode_long = range(3)
+	mode = mode_normal
+	for ch in s:
+		if mode == mode_normal and ch == '^':
+			mode = mode_caret
+			continue
+		elif mode == mode_caret and ch == '{':
+			mode = mode_long
+			continue
+		elif mode == mode_caret:
+			ss += translate_if_possible(ch, supscripts)
+			mode = mode_normal
+			continue
+		elif mode == mode_long and ch == '}':
+			mode = mode_normal
+			continue
+
+		if mode == mode_normal:
+			ss += ch
+		else:
+			ss += translate_if_possible(ch, supscripts)
+	return ss
+
+def translate_if_possible(ch, d):
+	if ch in d:
+		return d[ch]
+	return ch
+
+supscripts = {}
+supscripts["0"] = "⁰"
+supscripts["1"] = "¹"
+supscripts["2"] = "²"
+supscripts["3"] = "³"
+supscripts["4"] = "⁴"
+supscripts["5"] = "⁵"
+supscripts["6"] = "⁶"
+supscripts["7"] = "⁷"
+supscripts["8"] = "⁸"
+supscripts["9"] = "⁹"
+supscripts["+"] = "⁺"
+supscripts["-"] = "⁻"
+supscripts["="] = "⁼"
+
+latex_symbols = {}
 latex_symbols["\\alpha"] = "α"
 latex_symbols["\\beta"] = "β"
 latex_symbols["\\gamma"] = "γ"
