@@ -2,18 +2,18 @@
 import os
 import sys
 
-sys.path += [ os.getcwd() ]
+sys.path += [ os.getcwd(), os.getcwd() + "/guis" ]
 
-import_worked = False
 for implementation in os.listdir("guis"):
+	if implementation[-6:] != "gui.py":
+		continue
 	try:
-		__import__("guis." + implementation[:-3])
-		import_worked = True
+		__import__(implementation[:-3])
+		sys.exit(0)
 	except ImportError:
 		# Try next implementation
 		continue
 	except ValueError:
 		# This only occours because I was to lazy to check for __init__
 		continue
-if not import_worked:
-	print >> sys.stdout, "No suitable GUI module was found. Please install either PyGTK or Tkinter"
+sys.stderr.write("No suitable GUI module was found. Please install either PyGTK or Tkinter\n")
