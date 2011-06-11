@@ -3,6 +3,7 @@ import glib
 import convert
 
 window = gtk.Window()
+window.set_resizable(False)
 window.set_title("Latex to Unicode converter")
 table = gtk.Table(rows=3, columns=2)
 window.add(table)
