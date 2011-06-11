@@ -14,7 +14,18 @@ def command_exit(*args):
 def command_latex_code_changed(*args):
 	unicode_code.set(convert.convert(latex_code.get()))
 
+def center(window):
+	sw = window.winfo_screenwidth()
+	sh = window.winfo_screenheight()
+	rw = window.winfo_reqwidth()
+	rh = window.winfo_reqheight()
+	xc = (sw - rw) / 2
+	yc = (sh -rh) / 2
+	window.geometry("+%d+%d" % (xc, yc))
+	window.deiconify()
+
 root = Tk()
+root.withdraw()
 root.resizable(0, 0)
 root.title("Latex to Unicode converter")
 
@@ -48,4 +59,5 @@ unicode_entry.grid(column=2, row=2, columnspan=3, sticky=(W,E))
 for child in mainframe.winfo_children():
 	child.grid_configure(padx=5, pady=5)
 
+root.after(1, center, root)
 root.mainloop()
