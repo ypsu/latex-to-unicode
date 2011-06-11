@@ -1,3 +1,4 @@
+# vim:fileencoding=utf-8
 def convert(s):
 	ss = convert_single_symbol(s)
 	if ss != None:
