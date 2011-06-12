@@ -71,8 +71,6 @@ def translate_if_possible(ch, d):
 	return ch
 
 def load_data():
-	global blackboard, subscripts, superscripts
-
 	load_symbols()
 	load_dict("data/subscripts", subscripts)
 	load_dict("data/superscripts", superscripts)
