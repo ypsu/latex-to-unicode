@@ -1,5 +1,6 @@
 import gtk
 import glib
+import sys
 import convert
 
 window = gtk.Window()
@@ -30,6 +31,17 @@ def paste(*arguments):
 	window.hide()
 
 window.connect("hide", lambda *x: gtk.main_quit())
+
+def latex_code_changed(widget):
+	try:
+		preview_input.set_text(convert.convert(widget.get_text()))
+	except:
+		msg = "Exception: "
+		msg += str(sys.exc_info()[0])
+		msg += ": "
+		msg += str(sys.exc_info()[1])
+		preview_input.set_text(msg)
+
 def input_changed(widget, event):
 	if len(event.string) == 1:
 		if ord(event.string) == 13:
@@ -37,9 +49,9 @@ def input_changed(widget, event):
 		elif ord(event.string) == 27:
 			window.hide()
 		else:
-			preview_input.set_text(convert.convert(widget.get_text()))
+			latex_code_changed(widget)
 	else:
-		preview_input.set_text(convert.convert(widget.get_text()))
+		latex_code_changed(widget)
 
 latex_input.connect("key-release-event", input_changed)
 cancel_button.connect("clicked", lambda *x: gtk.main_quit())

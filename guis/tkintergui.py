@@ -12,7 +12,14 @@ def command_exit(*args):
 	root.destroy()
 
 def command_latex_code_changed(*args):
-	unicode_code.set(convert.convert(latex_code.get()))
+	try:
+		unicode_code.set(convert.convert(latex_code.get()))
+	except:
+		msg = "Exception: "
+		msg += str(sys.exc_info()[0])
+		msg += ": "
+		msg += str(sys.exc_info()[1])
+		unicode_code.set(msg)
 
 def center(window):
 	sw = window.winfo_screenwidth()
