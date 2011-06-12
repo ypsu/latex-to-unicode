@@ -12,11 +12,8 @@ def convert(s):
 	s = convert_latex_symbols(s)
 	s = apply_modifier(s, "^", superscripts)
 	s = apply_modifier(s, "_", subscripts)
-	s = apply_modifier(s, "\\textbb", textbb)
 	s = apply_modifier(s, "\\bb", textbb)
-	s = apply_modifier(s, "\\textbf", textbf)
 	s = apply_modifier(s, "\\bf", textbf)
-	s = apply_modifier(s, "\\emph", textit)
 	s = apply_modifier(s, "\\it", textit)
 	return s
 
