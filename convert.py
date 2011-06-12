@@ -13,6 +13,7 @@ def convert(s):
 	s = apply_modifier(s, "^", superscripts)
 	s = apply_modifier(s, "_", subscripts)
 	s = apply_modifier(s, "\\textbb", textbb)
+	s = apply_modifier(s, "\\textbf", textbf)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
@@ -72,6 +73,7 @@ def load_data():
 	load_dict("data/subscripts", subscripts)
 	load_dict("data/superscripts", superscripts)
 	load_dict("data/textbb", textbb)
+	load_dict("data/textbf", textbf)
 
 def load_dict(filename, D):
 	with open(filename, "r") as f:
@@ -99,4 +101,5 @@ data_loaded = False
 superscripts = {}
 subscripts = {}
 textbb = {}
+textbf = {}
 latex_symbols = []
