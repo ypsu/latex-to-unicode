@@ -13,7 +13,9 @@ def convert(s):
 	s = apply_modifier(s, "^", superscripts)
 	s = apply_modifier(s, "_", subscripts)
 	s = apply_modifier(s, "\\textbb", textbb)
+	s = apply_modifier(s, "\\bb", textbb)
 	s = apply_modifier(s, "\\textbf", textbf)
+	s = apply_modifier(s, "\\bf", textbf)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
