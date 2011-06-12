@@ -11,8 +11,8 @@ def convert(s):
 		return ss
 
 	s = convert_latex_symbols(s)
-	s = convert_superscripts(s)
-	s = convert_subscripts(s)
+	s = apply_modifier(s, "^", superscripts)
+	s = apply_modifier(s, "_", subscripts)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
@@ -31,50 +31,25 @@ def convert_latex_symbols(s):
 		s = s.replace(code, val)
 	return s
 
-# _23 => ₂3
-# _{23} => ₂₃
-def convert_superscripts(s):
-	s = list(s)
-	ss = ""
-	mode_normal, mode_caret, mode_long = range(3)
-	mode = mode_normal
-	for ch in s:
-		if mode == mode_normal and ch == '^':
-			mode = mode_caret
-			continue
-		elif mode == mode_caret and ch == '{':
-			mode = mode_long
-			continue
-		elif mode == mode_caret:
-			ss += translate_if_possible(ch, superscripts)
-			mode = mode_normal
-			continue
-		elif mode == mode_long and ch == '}':
-			mode = mode_normal
-			continue
-
-		if mode == mode_normal:
-			ss += ch
-		else:
-			ss += translate_if_possible(ch, superscripts)
-	return ss
-
+# Example: modifier = "^", D = superscripts
+# This will search for the ^ signs and replace the next
+# digit or (digits when {} is used) with its/their uppercase representation.
 # ^23 => ²3
 # ^{23} => ²³
-def convert_subscripts(s):
-	s = list(s)
-	ss = ""
-	mode_normal, mode_caret, mode_long = range(3)
+def apply_modifier(text, modifier, D):
+	text = text.replace(modifier, "^")
+	newtext = ""
+	mode_normal, mode_modified, mode_long = range(3)
 	mode = mode_normal
-	for ch in s:
-		if mode == mode_normal and ch == '_':
-			mode = mode_caret
+	for ch in text:
+		if mode == mode_normal and ch == '^':
+			mode = mode_modified
 			continue
-		elif mode == mode_caret and ch == '{':
+		elif mode == mode_modified and ch == '{':
 			mode = mode_long
 			continue
-		elif mode == mode_caret:
-			ss += translate_if_possible(ch, subscripts)
+		elif mode == mode_modified:
+			newtext += translate_if_possible(ch, D)
 			mode = mode_normal
 			continue
 		elif mode == mode_long and ch == '}':
@@ -82,10 +57,10 @@ def convert_subscripts(s):
 			continue
 
 		if mode == mode_normal:
-			ss += ch
+			newtext += ch
 		else:
-			ss += translate_if_possible(ch, subscripts)
-	return ss
+			newtext += translate_if_possible(ch, D)
+	return newtext
 
 def translate_if_possible(ch, d):
 	if ch in d:
@@ -95,7 +70,6 @@ def translate_if_possible(ch, d):
 def load_data():
 	global subscripts, superscripts
 
-	print("loading data")
 	load_symbols()
 	load_dict("data/subscripts", subscripts)
 	load_dict("data/superscripts", superscripts)
