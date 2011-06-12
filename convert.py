@@ -15,6 +15,8 @@ def convert(s):
 	s = apply_modifier(s, "\\bb", textbb)
 	s = apply_modifier(s, "\\bf", textbf)
 	s = apply_modifier(s, "\\it", textit)
+	s = apply_modifier(s, "\\cal", textcal)
+	s = apply_modifier(s, "\\frak", textfrak)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
@@ -76,6 +78,8 @@ def load_data():
 	load_dict("data/textbb", textbb)
 	load_dict("data/textbf", textbf)
 	load_dict("data/textit", textit)
+	load_dict("data/textcal", textcal)
+	load_dict("data/textfrak", textfrak)
 
 def load_dict(filename, D):
 	with open(filename, "r") as f:
@@ -105,4 +109,6 @@ subscripts = {}
 textbb = {}
 textbf = {}
 textit = {}
+textcal = {}
+textfrak = {}
 latex_symbols = []
