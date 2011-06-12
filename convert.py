@@ -1,4 +1,3 @@
-# vim:fileencoding=utf-8
 def convert(s):
 	global data_loaded
 
@@ -35,8 +34,6 @@ def convert_latex_symbols(s):
 # Example: modifier = "^", D = superscripts
 # This will search for the ^ signs and replace the next
 # digit or (digits when {} is used) with its/their uppercase representation.
-# ^23 => ²3
-# ^{23} => ²³
 def apply_modifier(text, modifier, D):
 	text = text.replace(modifier, "^")
 	newtext = ""
