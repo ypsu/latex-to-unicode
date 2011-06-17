@@ -1,3 +1,5 @@
+import re
+
 def convert(s):
 	global data_loaded
 
@@ -10,6 +12,7 @@ def convert(s):
 		return ss
 
 	s = convert_latex_symbols(s)
+	s = process_starting_modifiers(s)
 	s = apply_all_modifiers(s)
 	return s
 
@@ -27,6 +30,17 @@ def convert_single_symbol(s):
 def convert_latex_symbols(s):
 	for (code, val) in latex_symbols:
 		s = s.replace(code, val)
+	return s
+
+# If s start with "it ", "cal ", etc. then make the whole string
+# italic, calligraphic, etc.
+def process_starting_modifiers(s):
+	s = re.sub("^bb ", r"\\bb{", s)
+	s = re.sub("^bf ", r"\\bf{", s)
+	s = re.sub("^it ", r"\\it{", s)
+	s = re.sub("^cal ", r"\\cal{", s)
+	s = re.sub("^frak ", r"\\frak{", s)
+	s = re.sub("^mono ", r"\\mono{", s)
 	return s
 
 def apply_all_modifiers(s):
