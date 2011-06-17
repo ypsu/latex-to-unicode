@@ -10,14 +10,7 @@ def convert(s):
 		return ss
 
 	s = convert_latex_symbols(s)
-	s = apply_modifier(s, "^", superscripts)
-	s = apply_modifier(s, "_", subscripts)
-	s = apply_modifier(s, "\\bb", textbb)
-	s = apply_modifier(s, "\\bf", textbf)
-	s = apply_modifier(s, "\\it", textit)
-	s = apply_modifier(s, "\\cal", textcal)
-	s = apply_modifier(s, "\\frak", textfrak)
-	s = apply_modifier(s, "\\mono", textmono)
+	s = apply_all_modifiers(s)
 	return s
 
 # If s is just a latex code "alpha" or "beta" it converts it to its
@@ -34,6 +27,17 @@ def convert_single_symbol(s):
 def convert_latex_symbols(s):
 	for (code, val) in latex_symbols:
 		s = s.replace(code, val)
+	return s
+
+def apply_all_modifiers(s):
+	s = apply_modifier(s, "^", superscripts)
+	s = apply_modifier(s, "_", subscripts)
+	s = apply_modifier(s, "\\bb", textbb)
+	s = apply_modifier(s, "\\bf", textbf)
+	s = apply_modifier(s, "\\it", textit)
+	s = apply_modifier(s, "\\cal", textcal)
+	s = apply_modifier(s, "\\frak", textfrak)
+	s = apply_modifier(s, "\\mono", textmono)
 	return s
 
 # Example: modifier = "^", D = superscripts
