@@ -52,7 +52,7 @@ def apply_modifier(text, modifier, D):
 			mode = mode_long
 			continue
 		elif mode == mode_modified:
-			newtext += translate_if_possible(ch, D)
+			newtext += D.get(ch, ch)
 			mode = mode_normal
 			continue
 		elif mode == mode_long and ch == '}':
@@ -62,13 +62,8 @@ def apply_modifier(text, modifier, D):
 		if mode == mode_normal:
 			newtext += ch
 		else:
-			newtext += translate_if_possible(ch, D)
+			newtext += D.get(ch, ch)
 	return newtext
-
-def translate_if_possible(ch, d):
-	if ch in d:
-		return d[ch]
-	return ch
 
 def load_data():
 	load_symbols()
