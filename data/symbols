@@ -8,6 +8,7 @@
 \euro €
 \section §
 \space ␣
+\degree °
 \zeta ζ
 \Xi Ξ
 \xi ξ
@@ -112,7 +113,9 @@
 \rightarrow →
 \rho ρ
 \rhd ⊳
+\rfloor ⌋
 \Re ℜ
+\rceil ⌉
 \Psi Ψ
 \psi ψ
 \propto ∝
@@ -173,6 +176,7 @@
 \Lleftarrow ⇚
 \ll ≪
 \lhd ⊲
+\lfloor ⌊
 \lesssim ≲
 \lessgtr ≶
 \lesseqgtr ⋚
@@ -194,6 +198,7 @@
 \leftarrow ←
 \leadsto ↝
 \le ≤
+\lceil ⌈
 \Lambda Λ
 \lambda λ
 \kappa κ
@@ -203,6 +208,7 @@
 \int ∫
 \infty ∞
 \in ∈
+\implies ⇒
 \Im ℑ
 \hslash ℏ
 \hookrightarrow ↪
