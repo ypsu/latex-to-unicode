@@ -1,15 +1,4 @@
 This is a small application which pops up a window where you can enter
 some latex symbols and they are converted to unicode characters.
 
-After pressing enter the unicode string is copied to the clipboard and
-the window is destroyed.
-
-This application is written in Python using tkinter.
-
-Special thanks to Jos van den Oever, the author of unilatex.vim from
-which I have the latex <-> unicode mapping.
-
-Needs xclip and xdotool.
-
-Currently works only on Linux. Feel free to fork and make it work under
-other operating systems.
+Look at the wiki for more info: https://github.com/ypsu/latex-to-unicode/wiki
