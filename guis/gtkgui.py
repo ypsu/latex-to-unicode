@@ -53,7 +53,7 @@ def input_changed(widget, event):
 	else:
 		latex_code_changed(widget)
 
-latex_input.connect("key-release-event", input_changed)
+latex_input.connect("key-press-event", input_changed)
 cancel_button.connect("clicked", lambda *x: gtk.main_quit())
 paste_button.connect("clicked", paste)
 
