@@ -16,9 +16,11 @@
 \wr ≀
 \wp ℘
 \wedge ∧
+\land ∧
 \Vvdash ⊪
 \veebar ⊻
 \vee ∨
+\lor ∨
 \vdots ⋮
 \Vdash ⊩
 \vDash ⊨
@@ -112,6 +114,7 @@
 \rightarrowtail ↣
 \Rightarrow ⇒
 \rightarrow →
+\to →
 \rho ρ
 \rhd ⊳
 \rfloor ⌋
