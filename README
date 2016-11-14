@@ -2,3 +2,5 @@ This is a small application which pops up a window where you can enter
 some latex symbols and they are converted to unicode characters.
 
 Look at the wiki for more info: https://github.com/ypsu/latex-to-unicode/wiki
+
+This repo is public domain.
