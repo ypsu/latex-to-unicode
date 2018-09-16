@@ -95,11 +95,13 @@
 \smallfrown ⌢
 \simeq ≃
 \sim ∼
+\Sigma Σ
 \sigma σ
 \shortparallel ∥
 \sharp ♯
 \setminus ∖
 \searrow ↘
+\rVert ‖
 \rtimes ⋊
 \Rsh ↱
 \Rrightarrow ⇛
@@ -164,6 +166,7 @@
 \mho ℧
 \measuredangle ∡
 \mapsto ↦
+\lVert ‖
 \ltimes ⋉
 \Lsh ↰
 \lozenge ◊
